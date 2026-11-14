@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/Lucashcr/changelogr/internal/cli"
@@ -10,5 +11,8 @@ import (
 var version = "dev"
 
 func main() {
-	cli.New(version).Run(context.Background(), os.Args)
+	if err := cli.Build(version).Run(context.Background(), os.Args); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }

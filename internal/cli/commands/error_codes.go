@@ -1,0 +1,9 @@
+package commands
+
+const (
+	EXIT_SUCCESS        = 0
+	EXIT_GENERAL_ERROR  = 1
+	EXIT_INVALID_INPUT  = 2
+	EXIT_NOT_FOUND      = 3
+	EXIT_ALREADY_EXISTS = 4
+)
