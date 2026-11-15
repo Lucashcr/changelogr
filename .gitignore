@@ -35,3 +35,7 @@ go.work.sum
 
 # Custom
 /changelogr
+/changelogr.yml
+/changelogr.yaml
+/changelogr.json
+/changelogr.toml

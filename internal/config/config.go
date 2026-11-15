@@ -9,30 +9,45 @@ import (
 var ConfigTypeOptions = []string{"yaml", "yml", "toml", "json"}
 
 type Config struct {
-	Source SourceConfig
-	Target TargetConfig
+	Source SourceConfig `json:"source" yaml:"source" toml:"source"`
+	Target TargetConfig `json:"target" yaml:"target" toml:"target"`
 }
 
 type SourceConfig struct {
-	Path             string
-	FileNameTemplate string
+	Path string           `json:"path" yaml:"path" toml:"path"`
+	File SourceFileConfig `json:"file" yaml:"file" toml:"file"`
+}
+
+type SourceFileConfig struct {
+	Extension    string `json:"extension" yaml:"extension" toml:"extension"`
+	NameTemplate string `json:"name_template" yaml:"name_template" toml:"name_template"`
 }
 
 type TargetConfig struct {
-	Path     string
-	FileName string
-	Type     string
+	Path string           `json:"path" yaml:"path" toml:"path"`
+	File TargetFileConfig `json:"file" yaml:"file" toml:"file"`
+}
+
+type TargetFileConfig struct {
+	Extension string `json:"extension" yaml:"extension" toml:"extension"`
+	Name      string `json:"name" yaml:"name" toml:"name"`
 }
 
 func NewConfig() Config {
 	return Config{
 		Source: SourceConfig{
-			Path:             "changelog",
-			FileNameTemplate: "${date}.${counter:3}.md",
+			Path: "changelog",
+			File: SourceFileConfig{
+				Extension:    "md",
+				NameTemplate: "${date}.${counter:3}",
+			},
 		},
 		Target: TargetConfig{
-			Type:     "markdown",
-			FileName: "CHANGELOG.md",
+			Path: ".",
+			File: TargetFileConfig{
+				Extension: "md",
+				Name:      "CHANGELOG",
+			},
 		},
 	}
 }
