@@ -4,7 +4,7 @@ import (
 	urfave "github.com/urfave/cli/v3"
 
 	"github.com/Lucashcr/changelogr/internal/app"
-	"github.com/Lucashcr/changelogr/internal/cli/commands"
+	"github.com/Lucashcr/changelogr/internal/cli/command"
 )
 
 func New(version string) *urfave.Command {
@@ -24,7 +24,7 @@ func New(version string) *urfave.Command {
 		},
 
 		Commands: []*urfave.Command{
-			commands.NewInit(env),
+			command.NewInit(env),
 		},
 	}
 }
