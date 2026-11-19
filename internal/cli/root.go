@@ -7,7 +7,7 @@ import (
 	"github.com/Lucashcr/changelogr/internal/cli/commands"
 )
 
-func Build(version string) *urfave.Command {
+func New(version string) *urfave.Command {
 	env := &app.Env{}
 
 	return &urfave.Command{
@@ -24,7 +24,7 @@ func Build(version string) *urfave.Command {
 		},
 
 		Commands: []*urfave.Command{
-			commands.NewInitCommand(env),
+			commands.NewInit(env),
 		},
 	}
 }

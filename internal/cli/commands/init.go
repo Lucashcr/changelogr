@@ -9,6 +9,7 @@ import (
 	urfave "github.com/urfave/cli/v3"
 
 	"github.com/Lucashcr/changelogr/internal/app"
+	"github.com/Lucashcr/changelogr/internal/cli/exitcode"
 	"github.com/Lucashcr/changelogr/internal/config"
 )
 
@@ -17,14 +18,14 @@ func handleInit(env *app.Env, cmd *urfave.Command) error {
 	if err != nil {
 		return urfave.Exit(
 			fmt.Sprintf("Failed to check config file: %s", err),
-			EXIT_GENERAL_ERROR,
+			exitcode.GeneralError,
 		)
 	}
 
 	if configFileExists {
 		return urfave.Exit(
 			"Cannot initialize: Config file already exists",
-			EXIT_ALREADY_EXISTS,
+			exitcode.AlreadyExists,
 		)
 	}
 
@@ -36,7 +37,7 @@ func handleInit(env *app.Env, cmd *urfave.Command) error {
 				configType,
 				strings.Join(config.ConfigTypeOptions, ","),
 			),
-			EXIT_INVALID_INPUT,
+			exitcode.InvalidInput,
 		)
 	}
 
@@ -44,14 +45,14 @@ func handleInit(env *app.Env, cmd *urfave.Command) error {
 	if err != nil {
 		return urfave.Exit(
 			fmt.Sprintf("Failed to initialize: %s", err),
-			EXIT_GENERAL_ERROR,
+			exitcode.GeneralError,
 		)
 	}
 
 	return nil
 }
 
-func NewInitCommand(env *app.Env) *urfave.Command {
+func NewInit(env *app.Env) *urfave.Command {
 	return &urfave.Command{
 		Name:  "init",
 		Usage: "Initialize a new configuration",
